@@ -1,0 +1,47 @@
+<div class="border-bottom-grey header-top fixed-top">
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-6 text-start">
+          <a
+            href="javascript:void(0)"
+            onclick="openNav()"
+            ><i class="fa fa-bars color-black" aria-hidden="true"></i></a
+          >
+          <img
+          src="../../../assets/img/logo.png"
+          alt="Car Whistler"
+          title="Car Whistler"
+          class="img-fluid header-logo cursor-pointer"
+          routerLink="/dashboard"
+          />
+        </div>
+        <div class="col-6 text-end">
+          <ul class="header-menu-links">
+            <!-- <li class="border-right-grey cursor-pointer" routerLink="/addVehicle">Add Vehicle</li> -->
+            <li class="border-right-grey cursor-pointer" routerLink="/addVehicle">
+              <button class="btn btn-link p-0 m-0">Add Vehicle</button>     
+            </li>
+            <li class="position-relative">
+              <i
+                (click)="viewCart()"
+                class="fa fa-shopping-cart primary-color"
+                aria-hidden="true"
+              ></i>
+              <span *ngIf="cartItemCount > 0" class="badge bg-danger cart-badge top-0 position-absolute">
+                {{ cartItemCount }}
+              </span>
+            </li>
+            <li>
+              <span class="header-customer-name">{{ username }}</span> &nbsp;
+              <i class="fa fa-user-circle-o primary-color" aria-hidden="true" id="dropdownMenuButton" data-bs-toggle="dropdown"></i>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li class="cursor-pointer"><a class="dropdown-item" (click)="viewProfile()"><i class="fa fa-user-circle-o" aria-hidden="true">&nbsp;</i> View Profile</a></li>
+                <li class="cursor-pointer"><a class="dropdown-item" (click)="signOut()"><i class="fa fa-sign-out" aria-hidden="true">&nbsp;</i> Sign Out</a></li>
+              </ul>
+            </li>
+          </ul>
+
+      </div>
+    </div>
+  </div>
+</div>

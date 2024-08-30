@@ -1,0 +1,100 @@
+<div class="add-address-main-container">
+  <div class="header">
+    <h5 class="close-btn">Add Your Address</h5>
+    <a (click)="closeModal()" class="btn close-btn">
+      ⨉
+    </a>
+  </div>
+
+  <div class="add-address-container">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 text-center px-4">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="input-group mb-4">
+              <label for="name" class="form-label w-100 text-start">Name</label>
+              <span class="input-group-text" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+              <input type="text" formControlName="name" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" placeholder="Name" aria-label="name"
+                aria-describedby="basic-addon1" />
+              <div *ngIf="submitted && f['name'].errors" class="invalid-feedback text-end">
+                <div class="form-validation-error" *ngIf="f['name'].errors['required']">
+                  Name is required
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-4">
+              <label for="address" class="form-label w-100 text-start">Address</label>
+              <span class="input-group-text" id="basic-addon1"><i class="fa fa-home" aria-hidden="true"></i></span>
+              <input type="text" formControlName="address" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['address'].errors }" placeholder="Flat/ House No. / Company"
+                aria-label="address" aria-describedby="basic-addon1" />
+              <div *ngIf="submitted && f['address'].errors" class="invalid-feedback text-end">
+                <div class="form-validation-error" *ngIf="f['address'].errors['required']">
+                  Address is required
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-4">
+              <label for="state" class="form-label w-100 text-start">State</label>
+              <span class="input-group-text" id="basic-addon2"><i class="fa fa-map-marker"
+                  aria-hidden="true"></i></span>
+              <input type="text" formControlName="state" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['state'].errors }" placeholder="State" aria-label="state"
+                aria-describedby="basic-addon2" />
+              <div *ngIf="submitted && f['state'].errors" class="invalid-feedback text-end">
+                <div class="form-validation-error" *ngIf="f['state'].errors['required']">
+                  State is required
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-4">
+              <label for="city" class="form-label w-100 text-start">City</label>
+              <span class="input-group-text" id="basic-addon4"><i class="fa fa-map-marker"
+                  aria-hidden="true"></i></span>
+              <input type="text" formControlName="city" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['city'].errors }" placeholder="City / Distt / Town"
+                aria-label="city" aria-describedby="basic-addon4" />
+              <div *ngIf="submitted && f['city'].errors" class="invalid-feedback text-end">
+                <div class="form-validation-error" *ngIf="f['city'].errors['required']">
+                  City is required
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-4">
+              <label for="pincode" class="form-label w-100 text-start">Pincode</label>
+              <span class="input-group-text" id="basic-addon1"><i class="fa fa-thumb-tack"
+                  aria-hidden="true"></i></span>
+              <input type="number" formControlName="pincode" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['pincode'].errors }" placeholder="Enter Pincode"
+                aria-label="pincode" aria-describedby="basic-addon1" />
+              <div *ngIf="submitted && f['pincode'].errors" class="invalid-feedback text-end">
+                <div class="form-validation-error" *ngIf="f['pincode'].errors['required']">
+                  Pincode is required
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-4">
+              <label for="phone" class="form-label w-100 text-start">Phone</label>
+              <span class="input-group-text" id="basic-addon3"><i class="fa fa-mobile" aria-hidden="true"></i></span>
+              <input type="text" formControlName="phone" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }" placeholder="Enter Phone"
+                aria-label="Phone" aria-describedby="basic-addon3" />
+              <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                <div class="form-validation-error" *ngIf="f['phone'].errors['required']">Phone is required</div>
+                <div class="form-validation-error" *ngIf="f['phone'].errors['minlength']">Please enter 10 digit</div>
+                <div class="form-validation-error" *ngIf="f['phone'].errors['maxlength']">Cannot be longer than 10
+                  characters</div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <button type="submit" class="btn primary-bakground-color color-white w-100">
+                Add Address
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

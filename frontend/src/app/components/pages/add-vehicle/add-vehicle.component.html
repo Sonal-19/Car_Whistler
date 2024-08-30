@@ -1,0 +1,326 @@
+<div class="add-vehicle-main-container">
+  <div class="add-vehicle-container">
+    <div class="container-fluid">
+      <div class="row"><div class="d-flex justify-content-between align-items-center mb-3">
+        <i class="fa fa-arrow-left" aria-hidden="true" (click)="goBack()"></i>
+        <h4 class="text-center mx-auto">
+            <strong>Add Vehicle</strong>
+        </h4>
+      </div>
+        <div class="col-md-12 px-4">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div class="card">
+              <div class="card-body col-12">
+                <div class="mb-2">
+                  <h5 class="lead text-lg-start mt-3">
+                    <strong>Check Delivery Availability</strong>
+                  </h5>
+                  <div class="row g-2 align-items-center">
+                    <div class="col">
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">
+                          <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        </span>
+                        <input 
+                          type="text" 
+                          formControlName="pincode" 
+                          class="form-control"
+                          [ngClass]="{ 'is-invalid': submitted && f['pincode'].errors }" 
+                          placeholder="Enter pincode"
+                          aria-label="pincode" 
+                          aria-describedby="basic-addon3" 
+                          (input)="onPincodeInput()" 
+                        />
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <button 
+                        type="button" 
+                        class="btn btn-primary" 
+                        (click)="checkDeliveryDetails()">
+                        Check
+                      </button>
+                    </div>
+                  </div>
+                  <div *ngIf="submitted && f['pincode'].errors" class="invalid-feedback text-end">
+                    <div class="form-validation-error" *ngIf="f['pincode'].errors['required']">
+                      Pincode is required
+                    </div>
+                  </div>
+                </div>
+            
+                <div *ngIf="deliveryDetails" class="mb-2">
+                  <p>
+                    <strong style="font-size: 1.4rem;">₹{{ deliveryDetails.delivery_charge }}</strong>
+                    <span class="text-muted text-decoration-line-through ms-3" style="font-size: 1.2rem;">₹199</span>
+                  </p>
+                  <p>
+                    <span><i class="fa fa-truck" aria-hidden="true"></i></span>
+                    <span class="text-muted me-2 ms-2">Delivery by</span>
+                    <strong>{{ deliveryDate | date:'EEE, dd MMM' }}</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+
+            <div class="card mt-4 mb-4">
+              <div class="card-body col-12">
+
+                <h4 class="lead text-lg-start">
+                  <strong>Vehicle Number</strong>
+                </h4>
+                <div class="row g-2 align-items-center">
+                  <div class="col">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon2">
+                        <i class="fa fa-registered" aria-hidden="true"></i>
+                      </span>
+                      <input 
+                        type="text" 
+                        formControlName="registrationNumber" 
+                        class="form-control text-uppercase"
+                        [ngClass]="{ 'is-invalid': submitted && f['registrationNumber'].errors }"
+                        placeholder="eg- pb11ab1234" 
+                        aria-label="registrationNumber" 
+                        aria-describedby="basic-addon2" 
+                      />
+                      <div *ngIf="submitted && f['registrationNumber'].errors" class="invalid-feedback text-end">
+                        <div class="form-validation-error" *ngIf="f['registrationNumber'].errors['required']">
+                          Registration No is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-auto mb-3">
+                    <button type="button" (click)="getVehicleDetails()"
+                    class="btn btn-primary" >
+                      Check
+                    </button>
+                  </div>
+
+                </div>
+
+                <div *ngIf="vehicleDetails" class="vehicle-details">
+                  <div class="card-body">
+                  <h5 class="mb-2">Vehicle Details:</h5>
+                  <p><strong>Vehicle Number:</strong> {{ vehicleDetails.reg_no }}</p>
+                  <p><strong>State:</strong> {{ vehicleDetails.state }}</p>
+                  <p><strong>Owner Name:</strong> {{ vehicleDetails.owner_name }}</p>
+                  <p><strong>Office Name:</strong> {{ vehicleDetails.office_name }}</p>
+                  <p><strong>PAN No.:</strong> {{ vehicleDetails.pan_no }}</p>
+                  </div>
+                </div>
+
+                <!-- <h4 class="lead text-lg-start">
+                  <strong>Phone Number</strong>
+                </h4> -->
+                <div class="row g-2 align-items-center">
+                  <div class="col">
+                    <div class="input-group mb-4">
+                      <label for="phone" class="form-label w-100 text-start">
+                        <strong>Phone Number</strong>
+                      </label>
+                      <span class="input-group-text" id="basic-addon3">
+                        <i class="fa fa-mobile" aria-hidden="true"></i>
+                      </span>
+                      <input 
+                        type="text" 
+                        formControlName="phone" 
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }" placeholder="Enter Phone"
+                        aria-label="Phone" aria-describedby="basic-addon3" 
+                      />
+                      <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                        <div class="form-validation-error" *ngIf="f['phone'].errors['required']">Phone is required</div>
+                        <div class="form-validation-error" *ngIf="f['phone'].errors['minlength']">Please enter 10 digit
+                        </div>
+                        <div class="form-validation-error" *ngIf="f['phone'].errors['maxlength']">Cannot be longer than 10
+                          characters</div>
+                      </div>
+                    </div>
+                  </div>
+  
+                   <!-- Add Vehicle Button -->
+                  <div class="col-auto mt-3">
+                    <button type="submit" class="btn btn-primary">
+                      Add Vehicle
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </form>
+
+          <div *ngIf="selectedAddress; else noAddressTemplate" class="col-12 mb-4">
+            <div class="card">
+              <div class="card-body d-flex justify-content-between align-items-start">
+                <div class="flex-grow-1">
+                  <h4 class="lead text-lg-start">
+                    <strong>Delivery Address</strong>
+                  </h4>
+                  <p class="m-0 p-0"><strong>{{ selectedAddress.name }}</strong></p>
+                  <p class="m-0 p-0">{{ selectedAddress.address }}, {{ selectedAddress.city }}, {{
+                    selectedAddress.state }}, {{ selectedAddress.pincode }}</p>
+                  <p class="m-0 p-0">{{ selectedAddress.phone }}</p>
+                </div>
+                <div>
+                  <!-- <button (click)="ChangeAddress()" class="btn btn-primary">Change</button> -->
+                  <button (click)="ChangeAddress()" class="btn btn-link p-0 m-0 text-muted">Change</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+          <ng-template #noAddressTemplate>
+            <div class="text-center mb-4">
+              <button (click)="openAddAddressModal()" class="btn btn-primary w-100">Add Address</button>
+            </div>
+          </ng-template>
+
+          <!-- Modal Template -->
+          <ng-template #addAddress>
+            <div class="modal-header">
+              <h5 class="modal-title">Add New Address</h5>
+              <button type="button" class="close" (click)="modalRef?.hide()">&times;</button>
+            </div>
+            <div class="modal-body">
+              <app-add-address (addressAdded)="onAddressAdded($event)"></app-add-address>
+            </div>
+          </ng-template>
+
+          <ng-template #addressModal>
+            <div class="modal-header">
+              <h5 class="modal-title">Select Address</h5>
+              <button type="button" class="close" (click)="modalRef?.hide()">&times;</button>
+            </div>
+            <div class="modal-body">
+              <app-address (addressSelected)="onAddressSelected($event)"></app-address>
+            </div>
+          </ng-template>
+
+          <div class="input-group mb-4">
+            <button class="btn btn-primary w-100" (click)="proceedToPayment()">Proceed to Payment</button>
+          </div>
+
+        </div>
+
+        <h4 class="lead text-lg-start text-center">
+          <strong>Product Details</strong>
+        </h4>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <strong> Benefits </strong>
+              </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+              data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+      
+                <p> Begin your car journey with Car Whistler and say
+                  goodbye to all your car-parking related worries one
+                  service at a time.</p>
+      
+                <p>Get Sticker at your doorstep at
+                  <code>₹199/- only</code>
+                </p>
+      
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                <strong>Direction of Use</strong>
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+              data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+      
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">Activate Your Car Whistler Sticker in 7 Easy Steps:</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Click "Buy Sticker Now" and tap "+ Add Vehicle" on the Car Whistler homepage.</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Enter your pincode to check delivery availability.</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Enter your vehicle number and contact information.</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>Add or select your delivery address.</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>Complete the payment process.</td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td> Receive your sticker at your doorstep within 7 days.</td>
+                    </tr>
+                    <tr>
+                      <td>7</td>
+                      <td>Apply the sticker to your car and enjoy effortless journeys with Car Whistler.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                <strong> Product Description</strong>
+              </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+              data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <p> Brand Name: <code> Car Whistler </code> </p>
+                <p> Product Name: <code> Car Whistler | For Cars </code> </p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingFour">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                <strong>Manufacturer Details</strong>
+              </button>
+            </h2>
+            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
+              data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                Country of Origin :
+                <code>India</code>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="cart-main-container d-flex justify-content-center align-items-center">
+  <div class="cart-container">
+    <div class="container-fluid text-center">
+
+      <div class="d-flex cart-header justify-content-between align-items-center mb-3">
+        <i class="fa fa-arrow-left" aria-hidden="true" (click)="goBack()"></i>
+        <h4 class="text-center mx-auto">
+          <strong>Your Cart</strong>
+        </h4>
+      </div>
+
+      <div *ngIf="vehicles.length === 0">
+        <p>Oops! Your cart is empty.</p>
+        <div class="text-center mb-2">
+          <button (click)="buySticker()" class="btn btn-outline-primary p-2 mb-1">
+            Buy Sticker Now
+          </button>
+        </div>
+        <img src="../../../assets/img/cart1.png" class="img-fluid w-100" alt="cart">
+        <!-- <img src="../../../assets/img/cart2.png" class="img-fluid w-100" alt="cart"> -->
+      </div>
+      <div *ngFor="let vehicle of vehicles; let i = index" class="card mb-3 mx-auto" style="width: 18rem;">
+        <div class="card-body">
+          <p class="card-title">
+            <span><i class="fa fa-registered" aria-hidden="true"></i></span>
+            <strong> {{vehicle.vehicleId.reg_no }}</strong>
+          </p>
+          <p><strong>Owner Name:</strong> {{ vehicle.vehicleId.owner_name}}</p>
+          <!-- <p><strong>vehicleId:</strong> {{ vehicle.vehicleId._id}}</p> -->
+          <p><strong>PAN No.:</strong> {{ vehicle.vehicleId.pan_no}}</p>
+          <p><strong>Phone:</strong> {{ vehicle.vehicleId.phone}}</p>
+          <p> <strong>Office Name:</strong> {{ vehicle.vehicleId.office_name}}</p>
+          <p> <strong>State:</strong> {{ vehicle.vehicleId.state}}</p>
+          <div class="text-center mb-2">
+            <button class="btn btn-primary sticker w-100" (click)="order(vehicle.vehicleId._id)">
+              Complete Your Order
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

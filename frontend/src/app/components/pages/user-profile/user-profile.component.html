@@ -1,0 +1,155 @@
+<div class="profile-main-container">
+  <div class="profile-container">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <i class="fa fa-arrow-left" aria-hidden="true" (click)="goBack()"></i>
+          <h4 class="text-center mx-auto">
+              <strong>Your Profile</strong>
+          </h4>
+      </div>
+        <div class="col-md-12 text-center px-4">
+          <img
+            src="../../../assets/img/user.png"
+            alt="User Profile"
+            title="User Profile"
+            class="img-fluid d-block mx-auto mb-5 rounded-circle"
+          />
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="input-group mb-4">
+              <label for="fullName" class="form-label w-100 text-start">Name</label>
+              <span class="input-group-text" id="basic-addon1"
+                ><i class="fa fa-user" aria-hidden="true"></i
+              ></span>
+              <input
+                type="text"
+                formControlName="fullName"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['fullName'].errors }"
+                placeholder="Name"
+                aria-label="fullName"
+                aria-describedby="basic-addon1"
+              />
+              <div
+                *ngIf="submitted && f['fullName'].errors"
+                class="invalid-feedback text-end"
+              >
+                <div class="form-validation-error" *ngIf="f['fullName'].errors['required']">
+                  Name is required
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-4">
+              <label for="email" class="form-label w-100 text-start">Email</label>
+              <span class="input-group-text" id="basic-addon2"
+                ><i class="fa fa-envelope" aria-hidden="true"></i
+              ></span>
+              <input
+                type="text"
+                formControlName="email"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                placeholder="Email"
+                aria-label="Email"
+                aria-describedby="basic-addon2"
+              />
+              <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div class="form-validation-error" *ngIf="f['email'].errors['required']">Email is required</div>
+                <div class="form-validation-error" *ngIf="f['email'].errors['email']">Email is invalid</div>
+              </div>
+            </div>
+            <div class="input-group mb-4">
+              <label for="phone" class="form-label w-100 text-start">Phone</label>
+              <span class="input-group-text" id="basic-addon3"
+                ><i class="fa fa-mobile" aria-hidden="true"></i
+              ></span>
+              <input
+                type="text"
+                formControlName="phone"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }"
+                placeholder="Phone"
+                aria-label="Phone"
+                aria-describedby="basic-addon3"
+              />
+              <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                <div class="form-validation-error" *ngIf="f['phone'].errors['required']">Phone is required</div>
+                <div class="form-validation-error" *ngIf="f['phone'].errors['minlength']">Please enter 10 digit</div>
+              </div>
+            </div>
+            <div class="input-group mb-4">
+              <label for="password" class="form-label w-100 text-start">Password</label>
+              <span class="input-group-text" id="basic-addon4"
+                ><i class="fa fa-lock" aria-hidden="true"></i
+              ></span>
+              <input
+                id="password"
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="password"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+                placeholder="Password"
+                aria-label="Password"
+                aria-describedby="basic-addon4"
+              />
+              <span class="input-group-text" (click)="togglePasswordVisibility()">
+                <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'" aria-hidden="true"></i>
+              </span>
+              <div
+                *ngIf="submitted && f['password'].errors"
+                class="invalid-feedback"
+              >
+                <div class="form-validation-error" *ngIf="f['password'].errors['required']">
+                  Password is required
+                </div>
+                <div class="form-validation-error" *ngIf="f['password'].errors['minlength']">
+                  Password must be at least 6 characters
+                </div>
+                <div class="form-validation-error" *ngIf="f['password'].errors['maxlength']">
+                  Password must not exceed 40 characters
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-4">
+              <label for="confirmPassword" class="form-label w-100 text-start">Confirm Password</label>
+              <span class="input-group-text" id="basic-addon5"
+                ><i class="fa fa-lock" aria-hidden="true"></i
+              ></span>
+                <input
+                id="confirmPassword"
+                [type]="showConfirmPassword ? 'text' : 'password'"
+                formControlName="confirmPassword"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': submitted && f['confirmPassword'].errors
+                }"
+                placeholder="Confirm Password"
+                aria-label="Confirm Password"
+                aria-describedby="basic-addon5"
+              />
+              <span class="input-group-text" (click)="toggleConfirmPasswordVisibility()">
+                <i [class]="showConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'" aria-hidden="true"></i>
+              </span>
+              <div
+                *ngIf="submitted && f['confirmPassword'].errors"
+                class="invalid-feedback"
+              >
+                <div class="form-validation-error" *ngIf="f['confirmPassword'].errors['required']">
+                  Confirm Password is required
+                </div>
+                <div class="form-validation-error" *ngIf="f['confirmPassword'].errors['matching']">
+                  Confirm Password does not match
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <button type="submit" class="btn primary-bakground-color color-white w-100">
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

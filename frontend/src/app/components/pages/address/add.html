@@ -1,0 +1,64 @@
+<!-- <div class="address-main-container">
+    <div class="address-container">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 col-md-6 mb-3">
+            <div class="card addNewAddress lead text-lg-start text-center">
+              <div class="card-body lead text-lg-start text-center">
+                <a (click)="addNewAddress()"><i class="fa fa-home" aria-hidden="true">&nbsp;</i>Add New Address</a>
+              </div>
+            </div>
+          </div>
+        
+          <div class="col-12">
+            <div class="row">
+              <div *ngIf="addresses.length === 0" class="col-12 lead text-lg-start text-center mb-3">
+                <p>Add your address for delivery</p>
+                <img src="../../../assets/img/address2.png" class="img-fluid w-100" alt="address">
+              </div>
+              <h5 class="text-center text-muted">Select Delivery Address</h5>
+              <div *ngFor="let address of addresses" class="col-12 col-md-6 mb-3">
+                <div class="card">
+                  <div class="card-body d-flex justify-content-between align-items-start">
+                    <input
+                      type="radio"
+                      name="selectedAddress"
+                      [value]="address._id"
+                      [(ngModel)]="selectedAddress"
+                      class="form-check-input me-3"
+                      (change)="navigateToAddVehiclePage()"
+                    />
+                    <div class="flex-grow-1">
+                      <strong>Name: {{ address.name }}</strong>
+                      <p>Address: {{ address.address }}, {{ address.city }}, {{ address.state}},{{ address.pincode }}</p>
+                      <p>Phone: {{ address.phone }}</p>
+                    </div>
+                    <div class="dropdown">
+                      <button
+                        class="btn dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <span><i class="fa fa-ellipsis-vertical" aria-hidden="true"></i></span>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                        <li class="cursor-pointer">
+                          <a class="dropdown-item" (click)="editAddress(address._id)">Edit</a>
+                        </li>
+                        <li class="cursor-pointer">
+                          <a class="dropdown-item" (click)="deleteAddress(address._id)">Delete</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   -->

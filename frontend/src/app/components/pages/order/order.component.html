@@ -1,0 +1,132 @@
+<div class="add-vehicle-main-container">
+    <div class="add-vehicle-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <i class="fa fa-arrow-left" aria-hidden="true" (click)="goBack()"></i>
+                    <h4 class="text-center mx-auto">
+                        <strong>Place Order</strong>
+                    </h4>
+                </div>
+                <div class="col-md-12 px-4">
+
+                    <div class="card mb-4">
+                        <div class="vehicle-details" *ngIf="vehicleDetails">
+                            <div class="card-body">
+                                <h5 class="mb-2">Vehicle Details:</h5>
+                                <p><strong>Vehicle Number:</strong> {{ vehicleDetails.reg_no }}</p>
+                                <p><strong>State:</strong> {{ vehicleDetails.state }}</p>
+                                <p><strong>Owner Name:</strong> {{ vehicleDetails.owner_name }}</p>
+                                <p><strong>Office Name:</strong> {{ vehicleDetails.office_name }}</p>
+                                <p><strong>PAN No.:</strong> {{ vehicleDetails.pan_no }}</p>
+                                <p><strong>Phone No.:</strong> {{ vehicleDetails.phone }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form [formGroup]="form">
+                        <div class="card mb-4">
+                            <div class="card-body col-12">
+                                <div class="mb-2">
+                                    <h5 class="lead text-lg-start mt-3">
+                                        <strong>Check Delivery Availability</strong>
+                                    </h5>
+                                    <div class="row g-2 align-items-center">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon3">
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                </span>
+                                                <input type="text" formControlName="pincode" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f['pincode'].errors }"
+                                                    placeholder="Enter pincode" aria-label="pincode"
+                                                    aria-describedby="basic-addon3" (input)="onPincodeInput()" />
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="button" class="btn btn-primary"
+                                                (click)="checkDeliveryDetails()">
+                                                Check
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="submitted && f['pincode'].errors" class="invalid-feedback text-end">
+                                        <div class="form-validation-error" *ngIf="f['pincode'].errors['required']">
+                                            Pincode is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="deliveryDetails" class="mb-2">
+                                    <p>
+                                        <strong style="font-size: 1.4rem;">₹{{ deliveryDetails.delivery_charge }}</strong>
+                                        <span class="text-muted text-decoration-line-through ms-3"
+                                            style="font-size: 1.2rem;">₹199</span>
+                                    </p>
+                                    <p>
+                                        <span><i class="fa fa-truck" aria-hidden="true"></i></span>
+                                        <span class="text-muted me-2 ms-2">Delivery by</span>
+                                        <strong>{{ deliveryDate | date:'EEE, dd MMM' }}</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div *ngIf="selectedAddress; else noAddressTemplate" class="col-12 mb-4">
+                        <div class="card">
+                            <div class="card-body d-flex justify-content-between align-items-start">
+                                <div class="flex-grow-1">
+                                    <h4 class="lead text-lg-start">
+                                        <strong>Delivery Address</strong>
+                                    </h4>
+                                    <p class="m-0 p-0"><strong>{{ selectedAddress.name }}</strong></p>
+                                    <p class="m-0 p-0">{{ selectedAddress.address }}, {{ selectedAddress.city }}, {{
+                                        selectedAddress.state }}, {{ selectedAddress.pincode }}</p>
+                                    <p class="m-0 p-0">{{ selectedAddress.phone }}</p>
+                                </div>
+                                <div>
+                                    <!-- <button (click)="ChangeAddress()" class="btn btn-primary">Change</button> -->
+                                    <button (click)="ChangeAddress()"
+                                        class="btn btn-link p-0 m-0 text-muted">Change</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ng-template #noAddressTemplate>
+                        <div class="text-center mb-4">
+                            <button (click)="openAddAddressModal()" class="btn btn-primary w-100">Add Address</button>
+                        </div>
+                    </ng-template>
+
+                    <ng-template #addAddress>
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add New Address</h5>
+                            <button type="button" class="close" (click)="modalRef?.hide()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <app-add-address (addressAdded)="onAddressAdded($event)"></app-add-address>
+                        </div>
+                    </ng-template>
+
+                    <ng-template #addressModal>
+                        <div class="modal-header">
+                            <h5 class="modal-title">Select Address</h5>
+                            <button type="button" class="close" (click)="modalRef?.hide()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <app-address (addressSelected)="onAddressSelected($event)"></app-address>
+                        </div>
+                    </ng-template>
+
+                    <div class="input-group mb-4">
+                        <button class="btn btn-primary w-100" (click)="proceedToPayment()">Proceed to Payment</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

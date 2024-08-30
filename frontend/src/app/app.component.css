@@ -1,0 +1,5 @@
+#main-right-sidebar {
+  transition: margin-left .5s;
+  margin-left: 0px;
+  height: 100vh;
+}

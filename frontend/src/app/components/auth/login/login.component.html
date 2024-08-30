@@ -1,0 +1,103 @@
+<div class="login-main-container">
+  <div class="login-container">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 border-right-grey text-center position-relative">
+          <h4>
+            <strong
+              ><span class="primary-color">Join</span> Our Community</strong
+            >
+          </h4>
+          <img
+              src="../../../assets/img/logo.png"
+              alt="Car Whistler"
+              title="Car Whistler"
+              class="img-fluid d-block mx-auto mt-5 mb-5"
+            />
+          <p class="text-start login-copy-right"><strong>Copyright © 2023 Kommuno Technologies Pvt Ltd.</strong><br>All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-center px-5">
+          <!-- <h4 class="mb-5"><strong>Hello! Welcome Back</strong></h4> -->
+          <form [formGroup]="form" (ngSubmit)="onSubmit();">
+            <div class="input-group mb-4">
+              <span class="input-group-text" id="basic-addon1"
+                ><i class="fa fa-envelope" aria-hidden="true"></i
+              ></span>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="username"
+                [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+                placeholder="Email or Phone"
+                aria-label="username"
+                aria-describedby="basic-addon1"
+              />
+              <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                <div class="form-validation-error" *ngIf="f['username'].errors['required']">Username is required</div>
+              </div>
+            </div>
+            <div class="input-group mb-4">
+              <span class="input-group-text" id="basic-addon2"
+                ><i
+                  class="fa fa-lock"
+                  aria-hidden="true"
+                ></i
+              ></span>
+              <input
+                type="password"
+                formControlName="password"
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['password'].errors}"
+                placeholder="Password"
+                aria-label="Password"
+                aria-describedby="basic-addon2"
+                autocomplete="true"
+              />
+              <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                <div class="form-validation-error" *ngIf="f['password'].errors['required']">Password is required</div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <button type="submit" class="btn primary-bakground-color color-white w-100">
+                Sign In
+              </button>
+            </div>
+          </form>
+          <div class="input-group mb-3">
+            <a href="#" routerLink="/forgotPassword" class="primary-color text-decoration-none">Forgot Password?</a>
+          </div>
+          <a
+            href="https://www.linkedin.com/company/kommuno/"
+            class="primary-color"
+            target="_blank"
+          >
+            <i class="fa fa-linkedin login-social-icon" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://www.facebook.com/Kommuno"
+            class="primary-color"
+            target="_blank"
+          >
+            <i class="fa fa-facebook login-social-icon" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/kommunotechnologies/"
+            class="primary-color"
+            target="_blank"
+          >
+            <i class="fa fa-instagram login-social-icon" aria-hidden="true"></i>
+          </a>
+          <div class="row">
+            <div class="col-md-12 text-start mt-3">
+              <span class="color-black">Didn't have an account?</span> &nbsp;
+              <a href="#" routerLink="/register" class="primary-color text-decoration-none">Create account</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 text-center">
+          <p class="mobile-login-copy-right"><strong>Copyright © 2023 Kommuno Technologies Pvt Ltd.</strong><br>All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

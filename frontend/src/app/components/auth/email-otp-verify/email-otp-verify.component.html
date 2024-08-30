@@ -1,0 +1,74 @@
+<div class="email-otp-verify-main-container">
+    <div class="email-otp-verify-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center px-4">
+                    <img
+                    src="../../../assets/img/logo.png"
+                    alt="Car Whistler"
+                    title="Car Whistler"
+                    class="img-fluid d-block mx-auto mb-4">
+                    <h5 class="mb-2">Enter OTP</h5>
+                    <!-- <p>Enter the OTP sent to email</p> -->
+                    <!-- <p>Enter the OTP sent to <span class="text-primary">{{email}}</span> </p> -->
+                    <p>Enter the OTP sent to <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">{{email}}</a> </p>
+                </div>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="input-group mb-4">
+                       <input
+                        type="text"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f['otp'].errors}"
+                        formControlName="otp"
+                        placeholder="OTP"
+                        aria-label="otp"
+                        aria-describedy="basic-addon1"
+                       />
+                       <div
+                        *ngIf="submitted && f['otp'].errors" class="invalid-feedback" >
+                            <div class="form-validation-error" *ngIf="f['otp'].errors['required']">OTP is required</div>
+                            
+                       </div>
+                    </div>
+
+                     <!-- Display the OTP expiration timer -->
+                     <div *ngIf="!otpExpired" class="mb-4 text-center">
+                        <p>OTP will expire in {{ minutes | number: '2.0-0' }}:{{ seconds | number: '2.0-0' }} minutes</p>
+                    </div>
+                    <div *ngIf="otpExpired" class="mb-4 text-center text-danger">
+                        <p>OTP has expired. Please request a new one.</p>
+                    </div>
+
+                    <div class="input-group justify-content-center">
+                        <button type="submit" class="btn primary-bakground-color color-white w-100">
+                            Submit
+                        </button>
+                    </div>
+
+                    <!-- Resend OTP Button -->
+                    <div *ngIf="otpExpired && resendOtpEnabled" class="input-group mt-2 justify-content-center">
+                        <button type="button" class="btn btn-link text-decoration-none" (click)="resendOtp()">
+                        Resend OTP
+                        </button>
+                    </div>
+
+                    <div class="input-group mt-2 mb-4 justify-content-center">
+                        <a
+                          href="#"
+                          routerLink="/register"
+                          class="primary-color text-decoration-none"
+                          >Create account ?</a
+                        >
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <p class="mobile-email-otp-verify-copy-right">
+                          <strong>Copyright © 2023 Kommuno Technologies Pvt Ltd.</strong
+                          ><br />All rights reserved.
+                        </p>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

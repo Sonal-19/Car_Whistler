@@ -1,0 +1,56 @@
+<div class="dashboard-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 order-lg-1 order-2 my-3">
+        <div class="header text-lg-start text-center mb-3">
+          <h1 class="display-4 display-lg-3 mt-5 pt-3">
+            <strong>Everything for your car parking</strong>
+          </h1>
+        </div>
+        <p class="lead text-lg-start text-center mt-4 mb-4">
+          Begin your car journey with Car Whistler and say
+          goodbye to all your car-parking related worries one
+          service at a time.
+        </p>
+
+        <div class="d-flex justify-content-center mt-5">
+          <div class="card">
+            <img src="../../../assets/img/npci.png" alt="" class="card-img-top" style="width: 5rem;">
+            <div class="card-body">
+              <h2 class="card-title mb-4">
+                <span style=" display: block;"><strong>Get Sticker at your doorstep at</strong></span>
+                <strong style="display: block;">₹199/- only</strong>
+              </h2>
+              <div class="text-center mb-2">
+                <button (click)="buySticker()" class="btn sticker p-2 mb-1 w-100">
+                  Buy Sticker Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 order-lg-2 order-1 text-center my-3">
+        <img src="../../../assets/img/park.png" class="img-fluid w-100" alt="Car Parking">
+      </div>
+    </div>
+  </div>
+
+  <div class="vehicle-list">
+    <div *ngIf="vehicles.length > 0; else noVehicles">
+      <h2>My Vehicles</h2>
+      <div *ngFor="let vehicle of vehicles" class="vehicle-card">
+        <h3>{{ vehicle.reg_no }}</h3>
+        <p>Phone: {{ vehicle.phone }}</p>
+        <p>Added on: {{ vehicle.insertDateTime | date: 'medium' }}</p>
+        <!-- <button (click)="deleteVehicle(vehicle._id)">Delete</button> -->
+      </div>
+    </div>
+
+    <ng-template #noVehicles>
+      
+    </ng-template>
+  </div>
+
+
+</div>
